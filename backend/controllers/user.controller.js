@@ -45,7 +45,7 @@ export const login = async(req,res)=>
         if(!user)
             return res.status(404).json({message:"User does not exists"});
 
-        const isMatch = await bcrypt.compare(password,hashedPassword);
+        const isMatch = await bcrypt.compare(password,user.password);
         if(!isMatch)
             return res.status(404).json({message:"Invalid credentials"});
 
@@ -56,5 +56,23 @@ export const login = async(req,res)=>
         return res.json({token});
     }catch(error){
 
+    }
+}
+
+export const uploadProfilePicture = async(req,res)=>
+{
+    const {token} = req.body;
+    try
+    {
+        const user = await User.findOne({token:token});
+        if(!user){
+            return res.status(404).json({message:"User not found"});
+        }
+        user.profilePicture = req.file.filename;
+        await user.save();
+        return res.json({message:"Profile Picture Updated"});
+    }catch(error)
+    {
+        return res.status(500).json({message:error.message});
     }
 }
