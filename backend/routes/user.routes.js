@@ -1,5 +1,5 @@
 import {Router} from "express";
-import { register,login, updateUserProfile } from "../controllers/user.controller.js";
+import { register,login, updateUserProfile, getAllUserProfile } from "../controllers/user.controller.js";
 import { uploadProfilePicture } from "../controllers/user.controller.js";
 // import { updateUserProfile } from "../controllers/user.controller.js";
 import { getUserAndProfile } from "../controllers/user.controller.js";
@@ -22,6 +22,7 @@ router.route('/login').post(login)
 router.route('/user_update').post(updateUserProfile)
 router.route("/get_user_and_profile").get(getUserAndProfile);
 router.route("/update_profile_data").get(updateProfileData);
+router.route("/user/get_all_users").get(getAllUserProfile)
 
 
 export default router;
