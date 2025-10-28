@@ -3,6 +3,7 @@ import { register,login, updateUserProfile } from "../controllers/user.controlle
 import { uploadProfilePicture } from "../controllers/user.controller.js";
 // import { updateUserProfile } from "../controllers/user.controller.js";
 import { getUserAndProfile } from "../controllers/user.controller.js";
+import { updateProfileData } from "../controllers/user.controller.js";
 import multer from "multer";
 const router = Router();
 const storage = multer.diskStorage({
@@ -20,6 +21,7 @@ router.route('/register').post(register)
 router.route('/login').post(login)
 router.route('/user_update').post(updateUserProfile)
 router.route("/get_user_and_profile").get(getUserAndProfile);
+router.route("/update_profile_data").get(updateProfileData);
 
 
 export default router;

@@ -125,3 +125,22 @@ export const getUserAndProfile = async(req,res)=>{
         return res.status(500).json({message:error.message})
     }
 }
+
+export const updateProfileData = async(req,res)=>
+{
+    try{
+        const{token,...newProfileData} = req.body;
+        const userProfile = await User.findOne({token:token});
+        if(!userProfile)
+        {
+            return res.status(404).json({message:"User not found"});
+        }
+        const post_to_update = await Profile.findOne({userId:userProfile._id});
+        Object.assign(post_to_update,newProfileData);
+        await profile_to_update.save();
+        return res.json({message:"User profile update successfully"});
+    }catch(error)
+    {
+        return res.status(500).json({message:error.message})
+    }
+}
