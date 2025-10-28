@@ -26,6 +26,7 @@ export const register = async(req,res)=>
 
         await newUser.save();
         const profile = new Profile({userId:newUser._id});
+        await profile.save();
         return res.json({message:"User registered successfully"});
 
     }catch(err){
@@ -103,5 +104,24 @@ export const updateUserProfile = async(req,res)=>
     }catch(error)
     {
         return res.status(500).json({message:error.message});
+    }
+}
+
+export const getUserAndProfile = async(req,res)=>{
+    try
+    {
+        const {token} = req.body;
+        const user = await User.findOne({token:token});
+        if(!user)
+        {
+            return res.status(404).json({message:"User not found"})
+        }
+        const userProfile = await Profile.findOne({userId:user._id})
+        .populate('userId','name email username profilePicture');
+
+        return res.json(userProfile)
+    }catch(error)
+    {
+        return res.status(500).json({message:error.message})
     }
 }
