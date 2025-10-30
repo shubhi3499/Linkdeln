@@ -1,5 +1,6 @@
 import User from "../models/user.model.js";
 import Profile from "../models/profile.model.js";
+import Post from "../models/posts.model.js"; 
 
 
 
@@ -27,5 +28,17 @@ export const createPost = async(req,res)=>
         return res.status(200).json({message:"Post created"});
     }catch(error){
         return res.status(500).json({message:error.message});
+    }
+}
+
+export const getAllPosts = async(req,res)=>{
+    try
+    {
+        const posts = await Post.find().populate('userId','name username email profilePicture');
+        return res.json({posts});
+
+    }catch(error)
+    {
+        res.status(500).json({message:error.message});
     }
 }
