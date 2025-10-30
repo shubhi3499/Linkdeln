@@ -1,5 +1,5 @@
 import {Router} from "express";
-import { register,login, updateUserProfile, getAllUserProfile, download_profile } from "../controllers/user.controller.js";
+import { register,login, updateUserProfile, getAllUserProfile, download_profile, sendConnectionRequest, getMyConnectionsRequests, whatAreMyConnections, acceptRequest } from "../controllers/user.controller.js";
 import { uploadProfilePicture } from "../controllers/user.controller.js";
 // import { updateUserProfile } from "../controllers/user.controller.js";
 import { getUserAndProfile } from "../controllers/user.controller.js";
@@ -24,6 +24,10 @@ router.route("/get_user_and_profile").get(getUserAndProfile);
 router.route("/update_profile_data").get(updateProfileData);
 router.route("/user/get_all_users").get(getAllUserProfile);
 router.route("/user/download_resume").get(download_profile);
+router.route("/user/send_connection_request").post(sendConnectionRequest);
+router.route("/user/getConnectionRequests").get(getMyConnectionsRequests);
+router.route("/user/user_connection_request").get(whatAreMyConnections);
+router.route("/user/accept_connection_request").post(acceptRequest);
 
 
 export default router;
