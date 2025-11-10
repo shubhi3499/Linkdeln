@@ -21,6 +21,9 @@ const authSlice = createSlice({
     reset: () => initialState,
     handleLoginUser: (state) => {
       state.message = "hello";
+    },
+    emptyMessage:(state)=>{
+      state.message=""
     }
   },
   extraReducers: (builder) => {
@@ -65,5 +68,5 @@ const authSlice = createSlice({
   }
 });
 
-export const { reset, handleLoginUser } = authSlice.actions;
+export const { reset, handleLoginUser,emptyMessage } = authSlice.actions;
 export default authSlice.reducer;
