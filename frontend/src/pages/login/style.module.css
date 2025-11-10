@@ -58,12 +58,11 @@
 }
 
 .buttonWithOutline{
-    margin-top: 1.3rem;
-    border-radius: 20px;
-    border: 1px solid black;
-    font-size: 1.3rem;
-    font-weight: bold;
-    background: silver;
-    user-select: none;
-    cursor: pointer;
+  padding: 0.8rem 1.3rem;
+  background: rgb(236,236,236);
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  
+
 }
