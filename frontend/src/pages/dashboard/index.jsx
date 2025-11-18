@@ -6,6 +6,8 @@ import UserLayout from '@/layout/UserLayout';
 import { getAboutUser, getAllUsers } from '@/config/redux/action/authAction';
 import { getAllPosts } from '@/config/redux/action/postAction';
 import DashboardLayout from '@/layout/DashboardLayout';
+import styles from "./index.module.css";
+import { BASE_URL } from '@/config';
 
 export default function Dashboard() {
   const [isTokenThere, setIsTokenThere] = useState(false);
@@ -31,8 +33,26 @@ export default function Dashboard() {
   return(
     <UserLayout>
       <DashboardLayout>
-        <div>
-          <h1>Dashboard</h1>
+        <div className="scrollComponent">
+          <div className={styles.createPostContainer}>
+          <img className={styles.userProfile}
+              width={100}
+              src={
+                authState?.user?.userId?.profilePicture
+                  ? `${BASE_URL}/${authState.user.userId.profilePicture}`
+                  : "/default-profile.png"
+              }
+          />
+          <textarea></textarea>
+          <label htmlFor='fileUpload'>
+          <div className={styles.fab}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </div>
+          </label>
+          <input type='file' hidden id='fileUpload'/>
+          </div>
         </div>
       </DashboardLayout>
     </UserLayout>
