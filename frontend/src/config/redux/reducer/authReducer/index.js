@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAboutUser, loginUser, registerUser } from "../../action/authAction"; 
+import { getAboutUser, getAllUsers, loginUser, registerUser } from "../../action/authAction"; 
 // ✅ correct path based on your folder structure
 
 const initialState = {
@@ -12,7 +12,8 @@ const initialState = {
   isTokenThere:false,
   profileFetched: false,
   connections: [],
-  connectionRequest: []
+  connectionRequest: [],
+  all_profiles_fetched:false
 };
 
 const authSlice = createSlice({
@@ -77,6 +78,12 @@ const authSlice = createSlice({
         state.isError = false;
         state.profileFetched = true;
         state.user = action.payload.profile
+      })
+      .addCase(getAllUsers.fulfilled,(state,action)=>{
+        state.isLoading = false;
+        state.isError = false;
+        state.all_profiles_fetched = true;
+        state.all_users = action.payload.profiles
       })
   }
 });
